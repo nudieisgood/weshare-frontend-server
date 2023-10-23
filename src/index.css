@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+textarea {
+  @apply w-full border py-2 px-2 rounded-lg;
+}
+
+a {
+  @apply transition-all;
+}
+
+button {
+  @apply transition-all rounded-lg px-2 py-1;
+}
+
+.btn-normal {
+  @apply hover:bg-gray-200;
+}
+
+.btn-p-no {
+  @apply p-0;
+}
+
+.btn-p-md {
+  @apply px-3 py-2;
+}
+
+.btn-p-lg {
+  @apply px-4 py-2;
+}
+.btn-p-xl {
+  @apply px-5 py-3;
+}
+
+button.primary {
+  background-color: #f53850;
+  @apply p-2 w-full text-white rounded-lg;
+}
+
+.account.active {
+  background-color: #f53850;
+  @apply text-white;
+}
+
+.searchBarItem.active {
+  text-decoration: underline;
+  text-underline-offset: 0.6rem;
+  color: black;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
