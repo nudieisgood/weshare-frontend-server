@@ -8,7 +8,7 @@ import EditPlaceForm from "./EditPlaceForm";
 import MorePics from "./MorePics";
 import PlacePhotosContainer from "./PlacePhotosContainer";
 import BookingWidget from "./BookingWidget";
-import BookingInfo from "./bookingInfo";
+import BookingInfo from "./BookingInfo";
 import Footer from "./Footer";
 import Modal from "./Modal";
 import ModalContainer from "./ModalContainer";
