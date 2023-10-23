@@ -32,7 +32,7 @@ import { action as profileAction } from "./pages/Profile";
 import { action as myFavsAction } from "./pages/MyFavsPage";
 
 //loaders
-import { loader as homeLoader } from "./pages/home";
+import { loader as homeLoader } from "./pages/Home";
 import { loader as accountLayoutLoader } from "./pages/AccountLayout";
 import { loader as myPlacesLoader } from "./pages/MyPlaces";
 import { loader as editPlaceLoader } from "./pages/EditPlace";
