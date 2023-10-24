@@ -13,10 +13,10 @@ const EditProfileFormRow = ({
 }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   return (
-    <div className="border-b px-4 py-6">
+    <div className="border-b px-2 py-4 sm:px-4 sm:py-6">
       <div className="flex justify-between items-center">
         <div className="sm:flex gap-32 items-center">
-          <p className="text-2xl mb-2">{title}</p>
+          <p className="text-xl sm:text-2xl mb-2">{title}</p>
           {showEditForm ? (
             <FormInput
               noTitle={true}

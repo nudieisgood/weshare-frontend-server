@@ -27,9 +27,9 @@ const FormFileInput = () => {
 
   return (
     <div>
-      <h2 className="text-2xl">Photos</h2>
+      <h2 className="text-2xl">房源照片</h2>
       <p className="text-gray-400 text-sm mb-2">
-        upload your photos to get more attention
+        上傳房源以及周遭環境，設施等照片。
       </p>
 
       <div className="grid gap-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

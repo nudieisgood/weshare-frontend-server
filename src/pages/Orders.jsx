@@ -1,9 +1,7 @@
 import customFetch from "../utilits/customFetch";
-import { useLoaderData, Link, useNavigate } from "react-router-dom";
-import { BookingInfo, OrderStatus } from "../components";
+import { useLoaderData, Link } from "react-router-dom";
+import { OrderItem } from "../components";
 
-import { MdCreditCard } from "react-icons/md";
-import { TbPigMoney } from "react-icons/tb";
 import { forMatDate, sortBookingsByCheckInDate } from "../utilits/helper";
 
 export const loader = async () => {
@@ -17,23 +15,12 @@ export const loader = async () => {
 
 const Orders = () => {
   const { data: orders } = useLoaderData();
-  const navigate = useNavigate();
+
   console.log(orders);
 
   const checkInDates = orders.map((order) => order.checkIn);
 
   const setedCheckInDates = [...new Set(checkInDates)];
-
-  const confirmBooking = async (status, bookingId) => {
-    try {
-      const res = await customFetch.patch(`/booking/${bookingId}`, {
-        bookingStatus: status,
-      });
-      navigate("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   if (orders.length === 0)
     return (
@@ -52,63 +39,9 @@ const Orders = () => {
             <div className="text-2xl mb-2">{forMatDate(date)}</div>
             {sortBookingsByCheckInDate(orders)
               .filter((order) => order.checkIn === date)
-              .map((order) => {
-                return (
-                  <div
-                    key={order._id}
-                    className="flex lg:gap-3 bg-gray-100 rounded-xl overflow-hidden shadow-md transition-all mb-4"
-                  >
-                    <div className="w-32 sm:w-40 flex shrink-0 md:w-64">
-                      <img
-                        src={order.place.photos[0]}
-                        className="object-cover aspect-video"
-                      />
-                    </div>
-                    <div className="p-2 flex flex-col gap-2 grow">
-                      <h2 className="text-md sm:text-lg mt-2">
-                        預訂房源： {order.place.title}
-                      </h2>
-                      <tr className="border-t m-2"></tr>
-                      <h2 className="text-sm sm:text-md">
-                        訂房姓名：{order.name}
-                      </h2>
-                      <h2 className="text-sm sm:text-md">
-                        聯絡電話：{order.phone}
-                      </h2>
-                      <h2 className="text-sm sm:text-md">
-                        信箱：{order.user.email}
-                      </h2>
-                      <tr className="border-t m-2"></tr>
-                      <BookingInfo
-                        numOfNights={order.numOfNights}
-                        checkIn={order.checkIn}
-                        checkOut={order.checkOut}
-                        numOfGuest={order.numOfGuest}
-                      />
-                      <tr className="border-t m-2"></tr>
-                      <div className="flex justify-between items-end mt-2 text-md sm:text-lg md:text-xl">
-                        <div className="flex gap-1 items-center">
-                          ${order.price} TWD
-                          {
-                            <span className="ml-2 text-sm bg-gray-300 py-1 px-2 rounded-lg flex gap-1 items-center">
-                              {order.payment === "入住時付款" ? (
-                                <TbPigMoney className="text-xl" />
-                              ) : (
-                                <MdCreditCard className="text-xl" />
-                              )}
-                              {order.payment}
-                            </span>
-                          }
-                        </div>
-                        <OrderStatus
-                          {...order}
-                          confirmBooking={confirmBooking}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              .map((order) => (
+                <OrderItem key={order._id} order={order} />
+              ))}
           </div>
         ))}
     </section>

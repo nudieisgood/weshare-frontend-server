@@ -112,8 +112,10 @@ const Profile = () => {
       <div>
         <div className="flex items-center justify-between border-b pb-6 mt-4">
           <div>
-            <p className="text-3xl font-semibold mb-3">個人資訊</p>
-            <p className="text-lg">更新個人資訊並查看我們如何使用這些資訊。</p>
+            <p className="text-2xl sm:text-3xl font-semibold mb-3">個人資訊</p>
+            <p className="text-sm sm:text-lg">
+              更新個人資訊並查看我們如何使用這些資訊。
+            </p>
           </div>
           <div className="flex flex-col items-center gap-6">
             <div

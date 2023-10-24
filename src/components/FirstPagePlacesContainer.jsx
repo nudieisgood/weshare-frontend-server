@@ -12,7 +12,7 @@ const FirstPagePlacesContainer = ({ place }) => {
   const { title, photos, address, price, _id, reviews } = place;
 
   const avarageRating = (reviews) => {
-    if (!reviews.length) return "--";
+    if (!reviews.length) return "-";
     return (
       Math.round(
         (reviews
@@ -30,7 +30,7 @@ const FirstPagePlacesContainer = ({ place }) => {
         {checkIsMyFav(_id) ? (
           <button
             disabled={loading}
-            className="absolute top-3 left-3 text-white text-4xl"
+            className="absolute sm:top-3 sm:left-3 text-white text-4xl"
             onClick={async (e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -45,7 +45,7 @@ const FirstPagePlacesContainer = ({ place }) => {
         ) : (
           <button
             disabled={loading}
-            className="absolute top-3 left-3 text-white text-4xl"
+            className="absolute sm:top-3 sm:left-3 text-white text-4xl"
             onClick={async (e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -60,7 +60,7 @@ const FirstPagePlacesContainer = ({ place }) => {
         )}
         {photos.length > 0 && (
           <img
-            className="rounded-2xl object-cover aspect-square"
+            className="min-w-sm min-h-40 rounded-2xl object-cover aspect-square"
             src={photos[0]}
           />
         )}

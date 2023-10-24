@@ -4,7 +4,7 @@ import RenderAvatar from "./RenderAvatar";
 
 const ReviewsModal = ({ reviews, totalRating }) => {
   return (
-    <div className="text-start p-5">
+    <div className="text-start mt-4">
       <div className="text-4xl mb-4 flex gap-4 items-center">
         <div className="flex items-center gap-1">
           <AiFillStar className="text-yellow-300" /> {totalRating}

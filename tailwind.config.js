@@ -11,6 +11,13 @@ export default {
         primary: "#f5385d",
       },
     },
+    minWidth: {
+      sm: "158px",
+    },
+    minHeight: {
+      sm: "158px",
+    },
   },
+
   plugins: [],
 };

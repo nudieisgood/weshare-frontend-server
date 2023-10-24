@@ -20,6 +20,7 @@ import FirstPagePlacesContainer from "./FirstPagePlacesContainer";
 import EditProfileFormRow from "./EditProfileFormRow";
 import RenderAvatar from "./RenderAvatar";
 import PerksModal from "./PerksModal";
+import OrderItem from "./OrderItem";
 
 export {
   Header,
@@ -44,4 +45,5 @@ export {
   EditProfileFormRow,
   RenderAvatar,
   PerksModal,
+  OrderItem,
 };

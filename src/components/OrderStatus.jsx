@@ -12,27 +12,31 @@ const OrderStatus = ({ bookingStatus, _id, confirmBooking, checkOut }) => {
     return (
       <>
         <div className="grid justify-items-end gap-1">
-          <div className="flex gap-2">
-            <button
-              onClick={() => {
-                confirmBooking("cancel", _id);
-              }}
-              className="text-xs md:text-sm bg-gray-300 rounded-2xl px-3 py-1 hover:bg-primary"
-            >
-              <p>{bookingStatus === "pending" && "取消此訂單"}</p>
-            </button>
-            <button
-              onClick={() => {
-                confirmBooking("confirm", _id);
-              }}
-              className="text-xs md:text-sm bg-yellow-200 rounded-2xl px-3 py-1 hover:bg-yellow-400"
-            >
-              <p>{bookingStatus === "pending" && "確認此訂單"}</p>
-            </button>
+          <div className="flex flex-col gap-2">
+            <p className="text-gray-500 text-xs md:text-sm">
+              若訂單無誤， 請立即確認，以利房客安排行程
+            </p>
+            <div className="text-end">
+              <button
+                onClick={() => {
+                  confirmBooking("confirm", _id);
+                }}
+                className="text-xs md:text-sm bg-yellow-200 rounded-2xl px-3 py-1 hover:bg-yellow-400"
+              >
+                <p>{bookingStatus === "pending" && "確認"}</p>
+              </button>
+            </div>
+            <div className="text-end">
+              <button
+                onClick={() => {
+                  confirmBooking("cancel", _id);
+                }}
+                className="text-xs md:text-sm bg-gray-300 rounded-2xl px-3 py-1 hover:bg-primary"
+              >
+                <p>{bookingStatus === "pending" && "取消"}</p>
+              </button>
+            </div>
           </div>
-          <p className="text-gray-500 text-xs md:text-sm">
-            若訂單無誤， 請立即確認，以利房客安排行程
-          </p>
         </div>
       </>
     );
@@ -56,8 +60,8 @@ const OrderStatus = ({ bookingStatus, _id, confirmBooking, checkOut }) => {
       <>
         <div className="grid justify-items-end gap-1">
           <div className="flex flex-col gap-2">
-            <p className="text-xs">
-              此入住已到完成時間，請確認入住狀態，以利完成訂單
+            <p className="text-gray-500  text-xs md:text-sm">
+              此入住已到完成時間，請確認入住是否完成。
             </p>
             <div className="text-end">
               <button
@@ -66,7 +70,7 @@ const OrderStatus = ({ bookingStatus, _id, confirmBooking, checkOut }) => {
                 }}
                 className="mb-1 text-xs md:text-sm bg-yellow-200 rounded-2xl px-3 py-1 hover:bg-yellow-400"
               >
-                <p>入住完成</p>
+                <p>完成</p>
               </button>
             </div>
             <div className="text-end">
@@ -76,7 +80,7 @@ const OrderStatus = ({ bookingStatus, _id, confirmBooking, checkOut }) => {
                 }}
                 className="mb-1 text-xs md:text-sm bg-gray-300 rounded-2xl px-3 py-1 hover:bg-gray-400"
               >
-                <p>入住未完成</p>
+                <p>未完成</p>
               </button>
             </div>
           </div>

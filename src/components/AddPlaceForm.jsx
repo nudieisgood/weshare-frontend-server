@@ -51,7 +51,7 @@ const AddPlaceForm = () => {
         <PerksContainer
           labelText="公共設施"
           title="perks"
-          des="select all the perks of your place"
+          des="請選擇房源所提供的設施。"
           options={perkOptions}
         />
       </div>
@@ -59,14 +59,14 @@ const AddPlaceForm = () => {
         <PerksContainer
           title="surroundingEnv"
           labelText="周邊環境"
-          des="請選擇房源周邊環境"
+          des="請選擇房源周邊環境。"
           options={envOptions}
         />
       </div>
       <FormTextarea
         name="extraInfo"
         labelText="更多資訊"
-        des="house rules, etc..."
+        des="住宿規則，注意事項等等。"
       />
 
       <div>
@@ -115,7 +115,7 @@ const AddPlaceForm = () => {
         type="submit"
         className="primary self-end"
       >
-        {isSubmitting ? "submit..." : "submit"}
+        {isSubmitting ? "提交中..." : "確認"}
       </button>
     </Form>
   );

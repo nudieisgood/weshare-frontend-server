@@ -45,6 +45,10 @@ const Bookings = () => {
                   .filter((booking) => booking.checkIn === date)
                   .map((booking) => {
                     const { bookingStatus } = booking;
+                    const shortTitle =
+                      booking.place.title.length > 28
+                        ? booking.place.title.slice(0, 28) + "  ..."
+                        : booking.place.title;
 
                     let bookingStatusInCh;
                     if (bookingStatus === "pending")
@@ -70,22 +74,19 @@ const Bookings = () => {
                           />
                         </div>
                         <div className="p-2 flex flex-col gap-2 grow">
-                          <div className="flex justify-between">
+                          <div>
                             <h2 className="text-sm sm:text-lg md:text-xl">
-                              {booking.place.title}
-                              <p className="text-sm text-gray-500 lg:hidden">
+                              <p className="hidden sm:block">
+                                {booking.place.title}
+                              </p>
+                              <p className="sm:hidden">{shortTitle}</p>
+                              <p className="text-gray-500 ">
                                 {calDaysToCheckIn(
                                   booking.checkIn,
                                   booking.place.checkInTime
                                 )}
                               </p>
                             </h2>
-                            <p className="text-sm text-gray-500 hidden lg:block">
-                              {calDaysToCheckIn(
-                                booking.checkIn,
-                                booking.place.checkInTime
-                              )}
-                            </p>
                           </div>
 
                           <BookingInfo
@@ -101,7 +102,7 @@ const Bookings = () => {
                             <div className="grid justify-items-end gap-1">
                               {bookingStatus === "pending" && (
                                 <p className="text-gray-500 text-xs md:text-sm">
-                                  等待房源主確認
+                                  等待房源確認
                                 </p>
                               )}
                               {bookingStatus === "completed" &&
@@ -118,8 +119,8 @@ const Bookings = () => {
                               {bookingStatus === "completed" &&
                                 !booking.review && (
                                   <div className="text-gray-500 text-xs md:text-sm text-end">
-                                    <p>滿意您此次住宿嗎？</p>
-                                    <p>請完成對此次住宿的評價</p>
+                                    <p>滿意此次住宿嗎？</p>
+                                    <p>請完成對住宿評價</p>
                                   </div>
                                 )}
 
