@@ -60,7 +60,7 @@ const FirstPagePlacesContainer = ({ place }) => {
         )}
         {photos.length > 0 && (
           <img
-            className="min-w-sm min-h-40 rounded-2xl object-cover aspect-square"
+            className="min-w-sm min-h-sm rounded-2xl object-cover aspect-square"
             src={photos[0]}
           />
         )}
