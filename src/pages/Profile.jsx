@@ -3,6 +3,8 @@ import {
   Form,
   redirect,
   useOutletContext,
+  useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
 import customFetch from "../utilits/customFetch";
@@ -10,10 +12,11 @@ import {
   EditProfileFormRow,
   ModalContainer,
   RenderAvatar,
+  Spinner,
 } from "../components";
 import { BiLogOutCircle } from "react-icons/bi";
 import { AiOutlineCloudUpload, AiOutlineEdit } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { backendBaseURL } from "../utilits/customFetch";
 
 export const action = async ({ request }) => {
@@ -23,14 +26,26 @@ export const action = async ({ request }) => {
     await customFetch.patch("/user/update-user", formData);
     return redirect("/account");
   } catch (error) {
-    console.log(error?.response?.data?.msg);
+    return error?.response?.data?.msg;
   }
+};
+
+export const loader = () => {
+  console.log("profile loader");
   return null;
 };
 
 const Profile = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  const errorData = useActionData();
+
+  const errors = errorData?.split(",");
+
   const [showModal, setShowModal] = useState(false);
   const [photos, setPhotos] = useState([]);
+
   const navigate = useNavigate();
 
   const { changeUser, logout } = useAppContext();
@@ -101,10 +116,11 @@ const Profile = () => {
               </div>
             </div>
             <button
+              disabled={isSubmitting}
               className="flex gap-1 items-center bg-gray-100 px-3 py-1 rounded-lg hover:bg-gray-400 hover:text-white"
               type="submit"
             >
-              儲存
+              {isSubmitting ? <Spinner /> : "儲存"}
             </button>
           </div>
         </ModalContainer>
@@ -161,6 +177,7 @@ const Profile = () => {
           name="lastName"
         />
         <EditProfileFormRow
+          required={false}
           title="暱稱"
           defaultValue={user?.nickName}
           type="text"
@@ -168,25 +185,31 @@ const Profile = () => {
           desc="會以暱稱作為您的顯示名稱，若無提供則會使用您的姓名。"
         />
         <EditProfileFormRow
+          required={false}
           title="生日"
           defaultValue={user?.birth}
           type="text"
           name="birth"
+          desc="請依西元年月日輸入正確8碼格式 ex:19950523"
+          errors={errors}
         />
         <EditProfileFormRow
-          title="電話"
+          required={false}
+          title="手機"
           defaultValue={user?.phone}
           type="text"
           name="phone"
           desc="若有需要，您預訂的住宿或景點會使用此號碼聯繫您。"
+          errors={errors}
         />
         <EditProfileFormRow
+          required={false}
           title="地址"
           defaultValue={user?.address}
           type="text"
           name="address"
         />
-        <div className="border-b px-4 py-6 ">
+        <div className="border-b px-2 py-4 sm:px-4 sm:py-6">
           <div className="gap-32 sm:flex items-center">
             <p className="text-2xl">信箱</p>
             <p className="text-xl">{user.email}</p>

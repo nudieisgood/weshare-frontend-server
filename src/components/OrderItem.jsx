@@ -71,7 +71,7 @@ const OrderItem = ({ order }) => {
                 className="relative ml-2 text-sm bg-gray-300 py-1 px-2 rounded-lg flex gap-1 items-center"
               >
                 {showDrop && (
-                  <div className="absolute bottom-8 bg-gray-300 py-2 rounded-lg sm:hidden w-24 text-center">
+                  <div className="absolute bottom-8 right-0 bg-gray-300 py-2 rounded-lg sm:hidden w-24 text-center">
                     <p>{order.payment}</p>
                   </div>
                 )}

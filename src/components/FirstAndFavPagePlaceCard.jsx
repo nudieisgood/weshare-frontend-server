@@ -1,31 +1,16 @@
-import { Await, Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
+import { Link, useNavigate } from "react-router-dom";
+import { avarageRating } from "../utilits/helper";
 import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import { useState } from "react";
 
-const FirstPagePlacesContainer = ({ place }) => {
-  const [loading, setIsLoading] = useState(false);
-
+const FirstAndFavPagePlaceCard = ({ place }) => {
   const navigate = useNavigate();
   const { addToLove, removeLove, checkIsMyFav, user } = useAppContext();
-
-  const { title, photos, address, price, _id, reviews } = place;
-
-  const avarageRating = (reviews) => {
-    if (!reviews.length) return "-";
-    return (
-      Math.round(
-        (reviews
-          .map((review) => review.rating)
-          .reduce((acc, cur) => acc + cur, 0) /
-          reviews.length) *
-          100
-      ) / 100
-    );
-  };
-
+  const [loading, setIsLoading] = useState(false);
+  const { title, photos, price, _id, reviews, city } = place;
   return (
-    <Link className="relative " to={`/place/${_id}`} key={place._id}>
+    <Link className="relative" to={`/place/${_id}`}>
       <div className="rounded-2xl bg-gray-500">
         {checkIsMyFav(_id) ? (
           <button
@@ -59,16 +44,18 @@ const FirstPagePlacesContainer = ({ place }) => {
           </button>
         )}
         {photos.length > 0 && (
-          <img
-            className="min-w-sm min-h-sm rounded-2xl object-cover aspect-square"
-            src={photos[0]}
-          />
+          <div className="flex min-w-sm min-h-sm">
+            <img
+              className="w-full rounded-2xl object-cover aspect-square"
+              src={photos[0]}
+            />
+          </div>
         )}
       </div>
       <div className="flex justify-between">
-        <h2 className="text-sm mt-3 font-bold">{address}</h2>
+        <h2 className="text-sm mt-3 font-bold">{city}</h2>
         <div className="flex gap-1 items-center">
-          <AiFillStar className="text-yellow-400" />{" "}
+          <AiFillStar className="text-yellow-400" />
           <p>{avarageRating(reviews)}</p>
         </div>
       </div>
@@ -78,4 +65,4 @@ const FirstPagePlacesContainer = ({ place }) => {
     </Link>
   );
 };
-export default FirstPagePlacesContainer;
+export default FirstAndFavPagePlaceCard;

@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/hooks": "^7.1.6",
+    "@tanstack/react-query": "^5.0.5",
     "axios": "^1.5.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
     "react-simple-star-rating": "^5.1.7"
   },

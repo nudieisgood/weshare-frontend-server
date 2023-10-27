@@ -28,6 +28,7 @@ const Header = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const refEl = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handler = (e) => {
@@ -54,6 +55,7 @@ const Header = () => {
           <div>
             <Form className="hidden sm:flex border border-gray-300 rounded-full  px-2 py-1 items-center divide-x divide-gray-300 shadow-md">
               <FormInput
+                required={false}
                 name="search"
                 noTitle={true}
                 placeHolder="輸入關鍵字"
@@ -79,8 +81,9 @@ const Header = () => {
                 <p className="mt-5 mb-2 text-gray-500">
                   請輸入可能與地點相關的關鍵字
                 </p>
-                <Form className="flex border border-gray-300 rounded-full  px-2 py-1 items-center divide-x divide-gray-300 shadow-md">
+                <Form className="flex justify-between border border-gray-300 rounded-full px-2 py-1 items-center divide-x divide-gray-300 shadow-md">
                   <FormInput
+                    required={false}
                     name="search"
                     noTitle={true}
                     placeHolder="輸入關鍵字"
@@ -110,7 +113,7 @@ const Header = () => {
           {showDropDown && (
             <DropDownContainer>
               {user ? (
-                <div className="flex flex-col">
+                <div className="flex flex-col w-40">
                   {DropDownItems.ifLogin.map((item) => (
                     <DropDownLinkItem
                       key={item.name}
@@ -132,7 +135,7 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col">
+                <div className="flex flex-col w-48">
                   {DropDownItems.ifNotLogin.map((item) => (
                     <DropDownLinkItem
                       key={item.name}
@@ -143,8 +146,14 @@ const Header = () => {
                   ))}
                   <button
                     type="button"
-                    onClick={() => {
-                      loginTestUser();
+                    onClick={async () => {
+                      await loginTestUser();
+
+                      if (
+                        location.pathname === "/login" ||
+                        location.pathname === "/register"
+                      )
+                        navigate("/");
                     }}
                     className="flex w-full gap-2 items-center px-6 py-4 hover:bg-gray-200 hover:cursor-pointer"
                   >

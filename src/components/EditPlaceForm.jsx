@@ -2,17 +2,20 @@ import FormInput from "./FormInput";
 import FormFileInput from "./FormFileInput";
 import FormTextarea from "./FormTextarea";
 import PerksContainer from "./PerksContainer";
+import FormSelect from "./FormSelect";
 import { Form, Link, useNavigation } from "react-router-dom";
 import { perkOptions } from "../utilits/perkOptions";
 import { envOptions } from "../utilits/SurroundingEnv";
 import { MdOutlineClose } from "react-icons/md";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { useState } from "react";
+import { cities, roomTypes } from "../utilits/options";
 
-const EditPlaceForm = ({ place }) => {
+const EditPlaceForm = ({ place, errorArr }) => {
   const {
     _id,
+    city,
     address,
     checkInTime,
     checkOutTime,
@@ -25,6 +28,7 @@ const EditPlaceForm = ({ place }) => {
     perks,
     surroundingEnv,
     price,
+    roomType,
   } = place;
 
   // let perksArray;
@@ -53,11 +57,17 @@ const EditPlaceForm = ({ place }) => {
     >
       <FormInput
         defaultValue={title}
-        des="Title for your places, should be short and catchy as in advertisement."
+        des="房源標題，請提供簡短且吸引人的標題，以利房源廣告。"
         type="text"
         name="title"
         labelText="標題"
         placeHolder="Please provide your title."
+      />
+      <FormSelect
+        labelText="縣市"
+        name="city"
+        defaultValue={city}
+        list={cities}
       />
       <FormInput
         defaultValue={address}
@@ -89,7 +99,7 @@ const EditPlaceForm = ({ place }) => {
                   onClick={() => {
                     deleteOgPhoto(photo);
                   }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent opacity-0 hover:opacity-50"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent opacity-0 hover:opacity-80"
                 >
                   <BsTrash className="text-6xl text-primary" />
                 </button>
@@ -117,12 +127,17 @@ const EditPlaceForm = ({ place }) => {
         readOnly
         value={ogPhotos}
       />
+      <FormSelect
+        labelText="房源類型"
+        name="roomType"
+        defaultValue={roomType}
+        list={roomTypes}
+      />
       <FormTextarea
         defaultValue={description}
         name="description"
-        labelText="Description"
-        des="description of the place"
-        x
+        labelText="房源描述"
+        des="新增您房源的描述。"
       />
       <div className="lg:col-span-2">
         <PerksContainer
@@ -144,6 +159,7 @@ const EditPlaceForm = ({ place }) => {
       </div>
 
       <FormTextarea
+        required={false}
         defaultValue={extraInfo}
         name="extraInfo"
         labelText="更多資訊"
@@ -157,31 +173,37 @@ const EditPlaceForm = ({ place }) => {
         </p>
         <div className="grid sm:grid-cols-2 gap-1 items-end">
           <FormInput
+            inputError={errorArr?.includes("checkInTime should be 0 to 24.")}
+            des="請輸入 0 至 24 表示時間"
+            defaultValue={checkInTime}
             classValue="text-md"
             type="number"
             name="checkInTime"
             labelText="入住時間"
-            placeHolder="14 stands for 14:00"
           />
           <FormInput
+            inputError={errorArr?.includes("checkOutTime should be 0 to 24.")}
+            des="請輸入 0 至 24 表示時間"
+            defaultValue={checkOutTime}
             classValue="text-md"
             type="number"
             name="checkOutTime"
             labelText="退房時間"
-            placeHolder="11 stands for 11:00"
           />
           <FormInput
+            defaultValue={maxGuests}
             classValue="text-md"
             type="number"
             name="maxGuests"
             labelText="最多可訂房人數"
           />
           <FormInput
+            defaultValue={price}
             classValue="text-md"
             type="number"
             name="price"
             labelText="每晚價格"
-            placeHolder="TWD"
+            des="幣別 TWD"
           />
         </div>
       </div>
@@ -196,7 +218,7 @@ const EditPlaceForm = ({ place }) => {
         type="submit"
         className="primary self-end"
       >
-        {isSubmitting ? "submit..." : "submit"}
+        {isSubmitting ? "處理中..." : "確認修改"}
       </button>
     </Form>
   );

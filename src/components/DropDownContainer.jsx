@@ -10,7 +10,7 @@ const DropDownContainer = ({ children }) => {
         ease: "linear",
         duration: 0.2,
       }}
-      className="absolute overflow-hidden top-12 right-0  border rounded-lg bg-white min-w-max"
+      className="absolute overflow-hidden top-12 right-0 border rounded-lg bg-white"
     >
       {children}
     </motion.div>

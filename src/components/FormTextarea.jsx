@@ -1,4 +1,11 @@
-const FormTextarea = ({ name, des, rows = 5, labelText, defaultValue }) => {
+const FormTextarea = ({
+  name,
+  des,
+  rows = 5,
+  labelText,
+  defaultValue,
+  required = true,
+}) => {
   return (
     <div>
       <label htmlFor={name} className="text-2xl capitalize">
@@ -6,6 +13,7 @@ const FormTextarea = ({ name, des, rows = 5, labelText, defaultValue }) => {
       </label>
       <p className="text-sm text-gray-400">{des}</p>
       <textarea
+        required={required}
         defaultValue={defaultValue}
         name={name}
         id={name}

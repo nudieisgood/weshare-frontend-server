@@ -32,7 +32,6 @@ import { action as profileAction } from "./pages/Profile";
 import { action as myFavsAction } from "./pages/MyFavsPage";
 
 //loaders
-import { loader as homeLoader } from "./pages/Home";
 import { loader as accountLayoutLoader } from "./pages/AccountLayout";
 import { loader as myPlacesLoader } from "./pages/MyPlaces";
 import { loader as editPlaceLoader } from "./pages/EditPlace";
@@ -51,7 +50,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <HomeLayout />,
     children: [
-      { index: true, element: <Home />, loader: homeLoader },
+      { index: true, element: <Home /> },
       { path: "register", element: <Register />, action: registerAction },
       {
         path: "my-favs-page",

@@ -16,11 +16,14 @@ import BookingWidgetModal from "./BookingWidgetModal";
 import SharePlaceModal from "./SharePlaceModal";
 import OrderStatus from "./OrderStatus";
 import SearchPlaceContainer from "./SearchPlaceContainer";
-import FirstPagePlacesContainer from "./FirstPagePlacesContainer";
 import EditProfileFormRow from "./EditProfileFormRow";
 import RenderAvatar from "./RenderAvatar";
 import PerksModal from "./PerksModal";
 import OrderItem from "./OrderItem";
+import Spinner from "./Spinner";
+import CardLoader from "./CardLoader";
+import FirstAndFavPagePlaceCard from "./FirstAndFavPagePlaceCard";
+import ShowMapContainer from "./ShowMapContainer";
 
 export {
   Header,
@@ -41,9 +44,12 @@ export {
   SharePlaceModal,
   OrderStatus,
   SearchPlaceContainer,
-  FirstPagePlacesContainer,
   EditProfileFormRow,
   RenderAvatar,
   PerksModal,
   OrderItem,
+  Spinner,
+  CardLoader,
+  FirstAndFavPagePlaceCard,
+  ShowMapContainer,
 };

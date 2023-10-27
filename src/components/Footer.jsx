@@ -57,18 +57,21 @@ const Footer = () => {
           </a>
         </div>
         <div className="flex flex-col text-gray-600 text-sm gap-2">
-          <p className="font-bold">出租房源和舉辦體驗</p>
-          <Link className="hover:underline" to={"/account/places"}>
-            出租房源
-          </Link>
+          <p className="font-bold">關於WeShare</p>
           <a className="hover:underline" href="/">
-            出租和舉辦體驗的相關資源
+            客服支援
           </a>
           <a className="hover:underline" href="/">
-            社區論壇
+            合作夥伴支援中心
           </a>
           <a className="hover:underline" href="/">
-            房東及體驗達人義務
+            職涯發展
+          </a>
+          <a className="hover:underline" href="/">
+            投資人關係
+          </a>
+          <a className="hover:underline" href="/">
+            隱私權和 Cookie 聲明
           </a>
         </div>
         <div className="flex flex-col text-gray-600 text-sm gap-2">

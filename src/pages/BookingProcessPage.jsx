@@ -1,19 +1,20 @@
-import { useLocation, Link, Navigate, useNavigate } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoEarth } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import customFetch from "../utilits/customFetch";
 import { useAppContext } from "../context/appContext";
-import { FormInput } from "../components";
+import { FormInput, Spinner } from "../components";
 
 const BookingProcessPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [errorArr, setErrorArr] = useState(null);
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [creditCardNum, setCreditCardNum] = useState("");
   const [payment, setPayment] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const isDisabledSubmitBtn = Boolean(
     fullName && phone && creditCardNum && payment
@@ -27,6 +28,7 @@ const BookingProcessPage = () => {
   useEffect(() => {
     if (user) {
       setFullName(`${user?.lastName}${user?.name}`);
+      setPhone(user.phone);
     }
   }, [user]);
 
@@ -44,11 +46,14 @@ const BookingProcessPage = () => {
       creditCardNum,
     };
     try {
+      setIsLoading(true);
       const res = await customFetch.post("/booking", data);
       navigate(`/account/bookings/${res.data.data._id}`);
       // setRedirect(`/account/bookings/${res.data.data._id}`);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      const errors = error?.response?.data?.msg.split(",");
+      setErrorArr(errors);
     }
   };
 
@@ -77,28 +82,37 @@ const BookingProcessPage = () => {
           <FormInput
             type="number"
             name="phone"
-            labelText="電話"
+            labelText="手機"
+            des="請輸入台灣地區手機號碼。"
             value={phone}
+            inputError={errorArr?.includes("invalid phone")}
             onChange={(e) => setPhone(e.target.value)}
           />
+          {errorArr?.includes("invalid phone") && (
+            <p className="text-primary">手機格式有誤，請重新輸入</p>
+          )}
           <FormInput
             type="number"
             name="creditCardNum"
             labelText="信用卡號碼"
             value={creditCardNum}
+            des="請輸入 14 碼信用卡帳號。"
+            inputError={errorArr?.includes("invalid card number")}
             onChange={(e) => setCreditCardNum(e.target.value)}
           />
-
+          {errorArr?.includes("invalid phone") && (
+            <p className="text-primary">信用卡格式有誤，請重新輸入</p>
+          )}
           <button
-            disabled={!isDisabledSubmitBtn}
+            disabled={!isDisabledSubmitBtn || isLoading}
             onClick={submitOrder}
             className={
-              isDisabledSubmitBtn
+              isDisabledSubmitBtn || isLoading
                 ? "primary rounded-md"
                 : "bg-gray-300 rounded-md"
             }
           >
-            確認訂單
+            {isLoading ? <Spinner /> : "確認訂單"}
           </button>
         </div>
         <div className="flex flex-col border-t md:border-none">

@@ -19,7 +19,7 @@ import {
 } from "react-icons/md";
 import { CgSmartHomeWashMachine } from "react-icons/cg";
 import { AiFillAlert } from "react-icons/ai";
-import { BiLock } from "react-icons/bi";
+import { BiLock, BiLogoInternetExplorer } from "react-icons/bi";
 import { GiTable } from "react-icons/gi";
 import { LuUtensilsCrossed, LuMicrowave } from "react-icons/lu";
 import { LiaHotTubSolid, LiaUtensilsSolid } from "react-icons/lia";
@@ -33,7 +33,7 @@ export const perkOptions = [
     type: "Wifi",
     icon: <MdWifi />,
   },
-  { type: "網路孔" },
+  { type: "網路孔", icon: <BiLogoInternetExplorer /> },
   {
     type: "障礙者輔助設備",
     icon: <FaAccessibleIcon />,

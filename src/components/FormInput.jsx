@@ -4,22 +4,29 @@ const FormInput = ({
   labelText,
   placeHolder,
   des,
-  classValue = "text-2xl",
+  classValue,
   defaultValue,
   value,
   onChange,
   noTitle,
+  inputError,
+  required = true,
 }) => {
   return (
     <div>
       {!noTitle && (
-        <label className={`capitalize ${classValue} mb-2`} htmlFor={name}>
+        <label
+          className={`capitalize ${classValue ? classValue : "text-2xl"} mb-2`}
+          htmlFor={name}
+        >
           {labelText || name}
         </label>
       )}
 
       <p className="text-sm text-gray-400 mb-1">{des}</p>
       <input
+        required={required}
+        className={inputError ? "border-primary" : ""}
         type={type}
         name={name}
         id={name}

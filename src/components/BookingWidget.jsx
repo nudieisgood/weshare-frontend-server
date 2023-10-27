@@ -52,19 +52,25 @@ const BookingWidget = () => {
   if (!user) {
     return (
       <>
-        <div className="bg-gray-200 rounded-xl self-start p-4 text-center md:grid gap-4 hidden sticky top-16">
+        <div className="bg-gray-200 rounded-xl self-start p-4 text-center md:grid gap-4 hidden sticky top-20">
           <div className="text-2xl text-center font-bold">
             價格: ${price} / 每晚
           </div>
           <h2>立刻登入預訂，享住房最低價格</h2>
-          <button className="primary w-6/12">登入</button>
+          <Link to="/login">
+            <button className="bg-primary rounded-lg text-white w-6/12">
+              登入
+            </button>
+          </Link>
         </div>
         <div className="fixed bottom-0 left-0 w-full md:hidden bg-white py-2 text-center">
           <div className="text-xl text-center font-bold">${price} / 每晚</div>
           <p className="text-sm text-gray-400">立刻登入預訂，享住房最低價格</p>
-          <button className="bg-primary w-6/12 rounded-lg text-white">
-            登入
-          </button>
+          <Link to="/login">
+            <button className="bg-primary w-6/12 rounded-lg text-white">
+              登入
+            </button>
+          </Link>
         </div>
       </>
     );
@@ -73,7 +79,7 @@ const BookingWidget = () => {
   if (user._id === owner._id) {
     return (
       <>
-        <div className="bg-gray-200 rounded-xl self-start p-4 text-center md:grid gap-4 hidden sticky top-16">
+        <div className="bg-gray-200 rounded-xl self-start p-4 text-center md:grid gap-4 hidden sticky top-20">
           <div className="text-2xl text-center font-bold">很抱歉。</div>
           <h2>您無法對自己持有的住所下訂單，請使用其它帳戶預訂。</h2>
           <button className="primary w-6/12">登入其它帳戶</button>
@@ -112,7 +118,7 @@ const BookingWidget = () => {
           />
         </ModalContainer>
       )}
-      <div className="hidden md:block sticky top-16 justify-self-end self-start bg-white shadow p-5 rounded-2xl max-w-lg">
+      <div className="hidden md:block sticky top-20 justify-self-end self-start bg-white shadow p-5 rounded-2xl max-w-lg">
         <BookingWidgetModal
           title={title}
           checkIn={checkIn}

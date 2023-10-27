@@ -1,5 +1,5 @@
 import { redirect, useLoaderData } from "react-router-dom";
-import { FirstPagePlacesContainer } from "../components";
+import { FirstAndFavPagePlaceCard } from "../components";
 import { useAppContext } from "../context/appContext";
 import customFetch from "../utilits/customFetch";
 
@@ -29,20 +29,20 @@ const MyFavsPage = () => {
       <p className="text-xl md:text-4xl mb-4">我的收藏</p>
       {setFavPlacesCities.length > 0 &&
         setFavPlacesCities.map((setPlace) => (
-          <>
-            <div className="text-xl mt-4 border-t pt-4" key={setPlace}>
-              {setPlace}
-            </div>
-            <div className="overflow-scroll grid grid-row-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 pt-2 ">
+          <div key={setPlace}>
+            <div className="text-xl mt-4 border-t pt-4">{setPlace}</div>
+            <div className="overflow-scroll no-scrollbar grid grid-row-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 pt-2 ">
               {favPlaces
                 .filter((place) => place.city === setPlace)
                 .map((place) => {
                   return (
-                    <FirstPagePlacesContainer place={place} key={place._id} />
+                    <div key={place._id}>
+                      <FirstAndFavPagePlaceCard place={place} />
+                    </div>
                   );
                 })}
             </div>
-          </>
+          </div>
         ))}
     </div>
   );

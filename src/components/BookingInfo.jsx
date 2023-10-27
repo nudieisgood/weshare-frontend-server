@@ -22,7 +22,7 @@ const BookingInfo = ({ numOfNights, checkIn, checkOut, numOfGuest }) => {
           {forMatCheckInDate(checkIn)} ~ {forMatCheckOutDate(checkOut)}
         </div>
         {showDrop && (
-          <div className="absolute bottom-7 -left-6 bg-gray-300 py-2 rounded-lg sm:hidden w-56 text-center text-lg">
+          <div className="absolute bottom-7 -right-8 bg-gray-300 py-2 rounded-lg sm:hidden w-56 text-center text-lg">
             {forMatCheckInDate(checkIn)} ~ {forMatCheckOutDate(checkOut)}
           </div>
         )}

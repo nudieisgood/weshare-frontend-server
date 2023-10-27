@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect, useActionData, useLoaderData } from "react-router-dom";
 import { EditPlaceForm } from "../components";
 import customFetch from "../utilits/customFetch";
 import { perkOptions } from "../utilits/perkOptions";
@@ -52,17 +52,19 @@ export const action = async ({ request, params }) => {
 
     return redirect("/account/places");
   } catch (error) {
-    return error;
+    return error.response.data.msg;
   }
 };
 
 const EditPlace = () => {
+  const errorData = useActionData();
+  const errorArr = errorData?.split(",");
   const loaderData = useLoaderData();
   const place = loaderData.data.data;
 
   return (
     <>
-      <EditPlaceForm place={place} />
+      <EditPlaceForm place={place} errorArr={errorArr} />
     </>
   );
 };

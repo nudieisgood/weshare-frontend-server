@@ -11,7 +11,7 @@ import { envOptions } from "../utilits/SurroundingEnv";
 import { cities, roomTypes } from "../utilits/options";
 import { MdOutlineClose } from "react-icons/md";
 
-const AddPlaceForm = () => {
+const AddPlaceForm = ({ errorArr }) => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   return (
@@ -64,6 +64,7 @@ const AddPlaceForm = () => {
         />
       </div>
       <FormTextarea
+        required={false}
         name="extraInfo"
         labelText="更多資訊"
         des="住宿規則，注意事項等等。"
@@ -76,18 +77,20 @@ const AddPlaceForm = () => {
         </p>
         <div className="grid sm:grid-cols-2 gap-1 items-end">
           <FormInput
+            inputError={errorArr?.includes("checkInTime should be 0 to 24.")}
+            des="請輸入 0 至 24 表示時間"
             classValue="text-md"
             type="number"
             name="checkInTime"
             labelText="入住時間"
-            placeHolder="14 stands for 14:00"
           />
           <FormInput
+            inputError={errorArr?.includes("checkOutTime should be 0 to 24.")}
+            des="請輸入 0 至 24 表示時間"
             classValue="text-md"
             type="number"
             name="checkOutTime"
             labelText="退房時間"
-            placeHolder="11 stands for 11:00"
           />
           <FormInput
             classValue="text-md"
@@ -115,7 +118,7 @@ const AddPlaceForm = () => {
         type="submit"
         className="primary self-end"
       >
-        {isSubmitting ? "提交中..." : "確認"}
+        {isSubmitting ? "處理中..." : "確認"}
       </button>
     </Form>
   );

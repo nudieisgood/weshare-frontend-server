@@ -3,44 +3,84 @@ import FormInput from "./FormInput";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { GrStatusGood } from "react-icons/gr";
+import { useNavigation } from "react-router-dom";
+import Spinner from "./Spinner";
+import { useEffect } from "react";
 
 const EditProfileFormRow = ({
   desc,
   type = "text",
   title,
-  defaultValue = "未提供",
+  defaultValue,
   name,
+  required,
+  errors,
 }) => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   const [showEditForm, setShowEditForm] = useState(false);
+  const [errorArr, setErrorArr] = useState(null);
+
+  const isPhoneInputError =
+    name === "phone" && errorArr?.includes("invalid phone");
+  const isBirthInputError =
+    name === "birth" && errorArr?.includes("invalid birth");
+
+  useEffect(() => {
+    setErrorArr(errors);
+  }, [errors]);
+
+  const handleCancel = () => {
+    if (isBirthInputError) {
+      const updateErrorArr = errorArr?.filter((err) => err !== "invalid birth");
+      setErrorArr(updateErrorArr);
+    }
+    if (isPhoneInputError) {
+      const updateErrorArr = errorArr?.filter((err) => err !== "invalid phone");
+      setErrorArr(updateErrorArr);
+    }
+    // setErrorArr([]);
+    setShowEditForm(false);
+  };
+
   return (
     <div className="border-b px-2 py-4 sm:px-4 sm:py-6">
       <div className="flex justify-between items-center">
         <div className="sm:flex gap-32 items-center">
           <p className="text-xl sm:text-2xl mb-2">{title}</p>
           {showEditForm ? (
-            <FormInput
-              noTitle={true}
-              name={name}
-              defaultValue={defaultValue}
-              type={type}
-            />
+            <div>
+              <FormInput
+                required={required}
+                noTitle={true}
+                name={name}
+                defaultValue={defaultValue}
+                type={type}
+                inputError={isPhoneInputError || isBirthInputError}
+              />
+              {(isPhoneInputError || isBirthInputError) && (
+                <p className="text-primary mt-1">輸入格式錯誤</p>
+              )}
+            </div>
           ) : (
-            <p className="text-xl">{defaultValue}</p>
+            <p className="text-xl">{defaultValue || "未提供"}</p>
           )}
         </div>
         <div>
           {showEditForm ? (
             <div>
               <button
+                disabled={isSubmitting}
                 type="submit"
                 className="rounded-lg px-4 py-2 hover:border flex items-center gap-1"
               >
                 <GrStatusGood className="text-2xl" />
-                儲存
+                {isSubmitting ? <Spinner /> : "儲存"}
               </button>
               <button
+                disabled={isSubmitting}
                 type="button"
-                onClick={() => setShowEditForm(false)}
+                onClick={handleCancel}
                 className="rounded-lg px-4 py-2 hover:border flex items-center gap-1"
               >
                 <AiOutlineCloseCircle className="text-2xl" />

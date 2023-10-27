@@ -16,6 +16,7 @@ import {
   SharePlaceModal,
   RenderAvatar,
   PerksModal,
+  ShowMapContainer,
 } from "../components";
 import { perkOptions } from "../utilits/perkOptions";
 import { forMatDate } from "../utilits/helper";
@@ -50,6 +51,7 @@ const PlacePage = () => {
     price,
     roomType,
     reviews,
+    city,
   } = useLoaderData();
 
   const [showMorePics, setShowMorePics] = useState(false);
@@ -57,6 +59,7 @@ const PlacePage = () => {
   const [showIntroModal, setShowIntroModal] = useState(false);
   const [showPerksModal, setShowPerksModal] = useState(false);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
+  const [showRefoundModal, setShowRefoundModal] = useState(false);
 
   const contextValue = {
     _id,
@@ -88,8 +91,6 @@ const PlacePage = () => {
         100
     ) / 100;
 
-  const rating = 4.86;
-
   if (showMorePics)
     return <MorePics photos={photos} setShowMorePics={setShowMorePics} />;
 
@@ -118,6 +119,26 @@ const PlacePage = () => {
       {showReviewsModal && (
         <ModalContainer setShowModal={setShowReviewsModal}>
           <ReviewsModal reviews={reviews} totalRating={totalRating} />
+        </ModalContainer>
+      )}
+      {showRefoundModal && (
+        <ModalContainer setShowModal={setShowRefoundModal}>
+          <div className="p-3 text-start">
+            <h1 className="text-3xl mb-2">退訂政策</h1>
+            <p className="text-sm text-gray-500 mb-4">
+              預訂之前，請確認你同意遵守房東的《退訂政策》。請注意，
+              《特殊情況政策》不適用感染新冠肺炎或因新冠疫情影響而取消的預訂。
+            </p>
+            <p className="text-xl nb-2">取消截止時間</p>
+            <p className="border-b pb-4">
+              在入住日前 72 小時內取消預訂，即可拿回
+              全額退款：你將拿回已支付的全部款項。
+            </p>
+            <p className="mt-4">
+              在入住日後 72 小時內不可取消預定，無法退款 /
+              若未如入住日入住將會收取全額。
+            </p>
+          </div>
         </ModalContainer>
       )}
       <div className="bg-gray-100 mt-4 -mx-4 sm:-mx-8 lg:-mx-20 px-4 sm:px-8 lg:px-20 py-8">
@@ -203,10 +224,7 @@ const PlacePage = () => {
                   <p>{nickName || name}</p>
                 </div>
                 <div className="flex gap-2">
-                  <p className="text-lg">
-                    {rating > 4 ? "超讚的房東" : "還行的房東"}
-                  </p>
-                  /<p className="text-lg">擁有5年的待客經驗</p>
+                  <p className="text-md text-gray-500">擁有 6 年的待客經驗</p>
                 </div>
               </div>
             </div>
@@ -309,26 +327,78 @@ const PlacePage = () => {
               )}
             </div>
 
-            <div className="flex flex-col gap-2 border-t py-5">
-              <h1 className="text-2xl mb-3">注意事項</h1>
-              <div className="grid gap-4">
-                <div className="flex gap-2">
-                  <h2>入住時間 :</h2>
-                  <p>{`${checkInTime}:00`}</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 border-t py-5">
+              <div className="border-b pb-4 lg:border-none">
+                <h1 className="text-2xl mb-3">注意事項</h1>
+                <div className="grid gap-4">
+                  <div className="flex gap-2">
+                    <h2>入住時間 :</h2>
+                    <p>{`${checkInTime}:00`}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <h2>退房時間 :</h2>
+                    <p>{`${checkOutTime}:00`}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <h2>最大訂房人數:</h2>
+                    <p>{`${maxGuests} 人`}</p>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <h2>退房時間 :</h2>
-                  <p>{`${checkOutTime}:00`}</p>
+              </div>
+              <div className="border-b pb-4 lg:border-none">
+                <h1 className="text-2xl mb-3">安全設備</h1>
+                <div className="grid gap-4">
+                  <div>
+                    {perks?.includes("障礙者輔助設備") ? (
+                      <p>障礙者輔助設備</p>
+                    ) : (
+                      <p className="line-through">障礙者輔助設備</p>
+                    )}
+                  </div>
+                  <div>
+                    {perks?.includes("一氧化碳警報器") ? (
+                      <p>一氧化碳警報器</p>
+                    ) : (
+                      <p className="line-through">一氧化碳警報器</p>
+                    )}
+                  </div>
+                  <div>
+                    {perks?.includes("煙霧警報器") ? (
+                      <p>煙霧警報器</p>
+                    ) : (
+                      <p className="line-through">煙霧警報器</p>
+                    )}
+                  </div>
+                  <div>
+                    {perks?.includes("滅火器") ? (
+                      <p>滅火器</p>
+                    ) : (
+                      <p className="line-through">滅火器</p>
+                    )}
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <h2>最大訂房人數:</h2>
-                  <p>{`${maxGuests} 人`}</p>
+              </div>
+              <div>
+                <h1 className="text-2xl mb-3">退訂政策</h1>
+                <div className="grid gap-4">
+                  <div className="flex gap-2">
+                    48 小時內可免費取消。
+                    請查看房東完整的《退訂政策》；即便是因為感染新冠肺炎而取消，或新冠疫情導致旅程中斷，這些政策依然適用。
+                  </div>
                 </div>
+                <button
+                  className="hover:underline font-bold mt-4 btn-p-no flex  items-center border border-black btn-p-lg hover:bg-gray-200"
+                  onClick={() => setShowRefoundModal(true)}
+                >
+                  <p>顯示更多內容</p>
+                  <HiOutlineBarsArrowDown className="text-2xl" />
+                </button>
               </div>
             </div>
           </div>
           <BookingWidget />
         </div>
+        <ShowMapContainer address={address} city={city} />
       </div>
     </placePageContext.Provider>
   );

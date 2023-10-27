@@ -1,5 +1,11 @@
 import { HiOutlineDocumentPlus } from "react-icons/hi2";
-import { Link, useParams, redirect, useLoaderData } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  redirect,
+  useLoaderData,
+  useActionData,
+} from "react-router-dom";
 import { AddPlaceForm, MyPlacesContainer } from "../components";
 import customFetch from "../utilits/customFetch";
 
@@ -41,11 +47,9 @@ export const action = async ({ request }) => {
 
   try {
     const data = await customFetch.post("/places", formData);
-
     return null;
-    // return redirect("../places");
   } catch (error) {
-    return error;
+    return error.response.data.msg;
   }
 };
 
@@ -59,13 +63,16 @@ export const loader = async () => {
 };
 
 const Places = () => {
+  const errorData = useActionData();
+  const errorArr = errorData?.split(",");
+
   const { action } = useParams();
   const placesData = useLoaderData();
 
   return (
     <div className="w-full grid">
       {action === "new" ? (
-        <AddPlaceForm />
+        <AddPlaceForm errorArr={errorArr} />
       ) : (
         <div className="w-48 justify-self-center">
           <Link

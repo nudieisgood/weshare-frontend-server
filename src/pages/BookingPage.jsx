@@ -4,6 +4,8 @@ import {
   useNavigate,
   Form,
   redirect,
+  useNavigation,
+  useActionData,
 } from "react-router-dom";
 import customFetch from "../utilits/customFetch";
 import { MdCreditCard } from "react-icons/md";
@@ -13,7 +15,13 @@ import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { Rating } from "react-simple-star-rating";
 
 import { useState } from "react";
-import { BookingInfo, PlacePhotosContainer, MorePics } from "../components";
+import {
+  BookingInfo,
+  PlacePhotosContainer,
+  MorePics,
+  Spinner,
+  ShowMapContainer,
+} from "../components";
 import FormTextarea from "../components/FormTextarea";
 import {
   isOkToCancelBooking,
@@ -41,15 +49,18 @@ export const action = async ({ params, request }) => {
     await customFetch.post(`/booking/${bookingId}/reviews`, data);
     return redirect("");
   } catch (error) {
-    return error;
+    return error.response.data.msg;
   }
 };
 
 const BookingPage = () => {
   const [showMorePics, setShowMorePics] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(null);
   const bookingData = useLoaderData();
   const navigate = useNavigate();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const errorData = useActionData();
 
   const {
     checkIn,
@@ -113,8 +124,6 @@ const BookingPage = () => {
       ? "訂單完成。"
       : "訂單完成，別忘了給予此住宿體驗評價。";
   }
-
-  const detailAddress = "";
 
   if (showMorePics)
     return <MorePics photos={photos} setShowMorePics={setShowMorePics} />;
@@ -198,23 +207,15 @@ const BookingPage = () => {
             發卡單位可能會酌收海外消費手續費
           </div>
           <div className="border-t my-4"></div>
-          <div>
+          <div className="mb-4">
             <p className="font-bold">其他資訊</p>
             額外服務（如加床）不包含在總價內。
             如果您未如期入住或取消訂單，住宿方可能仍會向您收取相關稅費。
             提醒您閱讀下方的重要資訊，內含更多其他重要內容
           </div>
-          <div className="border-t my-4"></div>
+
           <div>
-            <p className="font-bold mb-2">住宿地點</p>
-            <p className="text-gray-500 text-xs"></p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.9776494868406!2d120.54019231044866!3d23.712492178607445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ec983af705077%3A0x95d8473b25a950c4!2zQ0lUWSBQQVJLSU5HIOWfjuW4gui7iuaXheWBnOi7iuWgtA!5e0!3m2!1sen!2stw!4v1697177352471!5m2!1sen!2stw"
-              allowFullScreen=""
-              className="w-full h-64 sm:h-72 md:h-96"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <ShowMapContainer address={place.address} city={place.city} />
           </div>
           <div className="border-t my-4"></div>
           <div className="">
@@ -236,7 +237,13 @@ const BookingPage = () => {
           {bookingStatus === "completed" && !review && (
             <Form className="mb-4" method="post">
               <div className="mb-2">
-                <div className="text-xl">Rating</div>
+                <div className="flex gap-4 items-center">
+                  <div className="text-2xl">滿意度</div>
+                  {errorData?.split(",")?.includes("rating is required.") && (
+                    <p className="text-primary">別忘了給予滿意度分數</p>
+                  )}
+                </div>
+
                 <Rating
                   SVGstyle={{ display: "inline" }}
                   onClick={handleRating}
@@ -251,8 +258,8 @@ const BookingPage = () => {
                 />
               </div>
               <FormTextarea labelText="請給予住宿體驗評價" name="content" />
-              <button className="primary" type="submit">
-                提交
+              <button disabled={isSubmitting} className="primary" type="submit">
+                {isSubmitting ? <Spinner /> : "提交"}
               </button>
             </Form>
           )}

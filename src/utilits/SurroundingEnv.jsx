@@ -4,7 +4,6 @@ import { PiParkDuotone } from "react-icons/pi";
 import { LiaCampgroundSolid } from "react-icons/lia";
 import { GiSeaCreature, GiMeditation, GiIsland, GiSheep } from "react-icons/gi";
 import { MdOutlineSurfing } from "react-icons/md";
-import { IoHomeOutline } from "react-icons/io5";
 
 export const envOptions = [
   { type: "海邊", icon: <TbBeach /> },
@@ -17,5 +16,4 @@ export const envOptions = [
   { type: "遠離塵囂", icon: <GiMeditation /> },
   { type: "休閒農場", icon: <GiSheep /> },
   { type: "島嶼", icon: <GiIsland /> },
-  { type: "家庭式旅館", icon: <IoHomeOutline /> },
 ];

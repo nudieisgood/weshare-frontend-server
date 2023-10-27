@@ -44,6 +44,19 @@ const genNewSearchParamString = (key, value, searchParams) => {
   return `?${sp.toString()}`;
 };
 
+const avarageRating = (reviews) => {
+  if (!reviews.length) return "-";
+  return (
+    Math.round(
+      (reviews
+        .map((review) => review.rating)
+        .reduce((acc, cur) => acc + cur, 0) /
+        reviews.length) *
+        100
+    ) / 100
+  );
+};
+
 export {
   forMatDate,
   isFinishedAccommodate,
@@ -53,4 +66,5 @@ export {
   calDaysToCheckIn,
   genNewSearchParamString,
   sortBookingsByCheckInDate,
+  avarageRating,
 };
