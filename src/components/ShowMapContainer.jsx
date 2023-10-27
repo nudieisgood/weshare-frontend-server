@@ -1,38 +1,24 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import customFetch from "../utilits/customFetch";
+import { BiError } from "react-icons/bi";
 
-const ShowMapContainer = ({ address, city }) => {
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-
-  const getmapData = async () => {
-    const data = await customFetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyACQ_KonSkfzcMatergyAnqOeTCOJNtPM0`,
-      { withCredentials: false }
-    );
-
-    const lat = data?.data?.results[0]?.geometry.location.lat;
-    const lng = data?.data?.results[0]?.geometry.location.lng;
-    setLat(lat);
-    setLng(lng);
-  };
-  useEffect(() => {
-    getmapData();
-  }, []);
+const ShowMapContainer = ({ city, geoLocation }) => {
   return (
     <div className="border-t">
       <h1 className="text-2xl my-4 ">住宿地點</h1>
-      <div>{lat}</div>
-      <div>{lng}</div>
       <div className="text-xl mb-4">{city} 台灣</div>
-      <iframe
-        src={`https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`}
-        allowFullScreen=""
-        className="w-full h-64 sm:h-72 md:h-96"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+      {!geoLocation?.lat ? (
+        <div className="p-8 items-center flex gap-2">
+          <BiError className="text-2xl" />
+          很抱歉，地圖載入失敗，待房主更新地址資料...
+        </div>
+      ) : (
+        <iframe
+          src={`https://maps.google.com/maps?q=${geoLocation?.lat},${geoLocation?.lng}&z=15&output=embed`}
+          allowFullScreen=""
+          className="w-full h-64 sm:h-72 md:h-96"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      )}
     </div>
   );
 };

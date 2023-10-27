@@ -215,7 +215,11 @@ const BookingPage = () => {
           </div>
 
           <div>
-            <ShowMapContainer address={place.address} city={place.city} />
+            <ShowMapContainer
+              address={place.address}
+              city={place.city}
+              geoLocation={place.geoLocation}
+            />
           </div>
           <div className="border-t my-4"></div>
           <div className="">

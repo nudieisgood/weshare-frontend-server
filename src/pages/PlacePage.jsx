@@ -52,6 +52,7 @@ const PlacePage = () => {
     roomType,
     reviews,
     city,
+    geoLocation,
   } = useLoaderData();
 
   const [showMorePics, setShowMorePics] = useState(false);
@@ -398,7 +399,11 @@ const PlacePage = () => {
           </div>
           <BookingWidget />
         </div>
-        <ShowMapContainer address={address} city={city} />
+        <ShowMapContainer
+          address={address}
+          city={city}
+          geoLocation={geoLocation}
+        />
       </div>
     </placePageContext.Provider>
   );
