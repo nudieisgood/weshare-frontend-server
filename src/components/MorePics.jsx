@@ -1,11 +1,7 @@
 import { IoMdArrowBack } from "react-icons/io";
-
 import { motion } from "framer-motion";
-// import { usePlacePageContext } from "../pages/PlacePage";
 
 const MorePics = ({ photos, setShowMorePics }) => {
-  // const { photos, setShowMorePics } = usePlacePageContext();
-
   return (
     <motion.div
       initial={{ x: "-100%" }}

@@ -31,9 +31,6 @@ const EditPlaceForm = ({ place, errorArr }) => {
     roomType,
   } = place;
 
-  // let perksArray;
-  // if (perks.length > 0) perksArray = perks[0].split(",");
-
   const [ogPhotos, setOgPhotos] = useState(photos);
 
   const deleteOgPhoto = (photo) => {

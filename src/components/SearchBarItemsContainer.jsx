@@ -3,7 +3,7 @@ import { envOptions } from "../utilits/SurroundingEnv";
 import { genNewSearchParamString } from "../utilits/helper";
 import { roomTypes } from "../utilits/RoomTypes";
 import { useState } from "react";
-// genNewSearchParamString("surroundingEnv", "海邊", searchParams)
+
 const SearchBarItemsContainer = ({ searchParams }) => {
   const [active, setActive] = useState(null);
   return (

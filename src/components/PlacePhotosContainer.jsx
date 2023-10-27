@@ -1,7 +1,6 @@
 // import { usePlacePageContext } from "../pages/PlacePage";
 import { TbPhotoSearch } from "react-icons/tb";
 const PlacePhotosContainer = ({ photos, setShowMorePics, showMorePics }) => {
-  // const { photos, setShowMorePics, showMorePics } = usePlacePageContext();
   if (photos.length > 0 && photos.length > 2)
     return (
       <div className="mt-4 -mr-4 sm:mr-0 overflow-hidden grid gap-2 sm:grid-cols-[2fr_1fr] -mx-6 sm:mx-0 sm:rounded-xl">

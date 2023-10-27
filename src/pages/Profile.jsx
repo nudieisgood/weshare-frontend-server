@@ -31,7 +31,6 @@ export const action = async ({ request }) => {
 };
 
 export const loader = () => {
-  console.log("profile loader");
   return null;
 };
 

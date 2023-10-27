@@ -7,7 +7,7 @@ export const action = async ({ params }) => {
   try {
     await customFetch.delete(`/places/${id}`);
   } catch (error) {
-    console.log(error);
+    return error;
   }
 
   return redirect("/account/places");

@@ -10,7 +10,6 @@ import PlacePhotosContainer from "./PlacePhotosContainer";
 import BookingWidget from "./BookingWidget";
 import BookingInfo from "./BookingInfo";
 import Footer from "./Footer";
-import Modal from "./Modal";
 import ModalContainer from "./ModalContainer";
 import BookingWidgetModal from "./BookingWidgetModal";
 import SharePlaceModal from "./SharePlaceModal";
@@ -38,7 +37,6 @@ export {
   BookingWidget,
   BookingInfo,
   Footer,
-  Modal,
   ModalContainer,
   BookingWidgetModal,
   SharePlaceModal,

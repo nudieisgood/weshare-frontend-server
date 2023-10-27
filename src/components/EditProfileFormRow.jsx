@@ -31,15 +31,15 @@ const EditProfileFormRow = ({
   }, [errors]);
 
   const handleCancel = () => {
-    if (isBirthInputError) {
-      const updateErrorArr = errorArr?.filter((err) => err !== "invalid birth");
-      setErrorArr(updateErrorArr);
-    }
-    if (isPhoneInputError) {
-      const updateErrorArr = errorArr?.filter((err) => err !== "invalid phone");
-      setErrorArr(updateErrorArr);
-    }
-    // setErrorArr([]);
+    // if (isBirthInputError) {
+    //   const updateErrorArr = errorArr?.filter((err) => err !== "invalid birth");
+    //   setErrorArr(updateErrorArr);
+    // }
+    // if (isPhoneInputError) {
+    //   const updateErrorArr = errorArr?.filter((err) => err !== "invalid phone");
+    //   setErrorArr(updateErrorArr);
+    // }
+    setErrorArr([]);
     setShowEditForm(false);
   };
 

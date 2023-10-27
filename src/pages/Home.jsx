@@ -5,20 +5,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useIntersection } from "@mantine/hooks";
 import { useEffect, useRef } from "react";
 
-// export const loader = async ({ request }) => {
-//   const params = Object.fromEntries([
-//     ...new URL(request.url).searchParams.entries(),
-//   ]);
-
-//   try {
-//     const res = await customFetch.get("/places", { params });
-
-//     return { places: res.data.data, params };
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -68,28 +54,28 @@ const Home = () => {
   if (!places?.length && isFetching)
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 min-h-screen">
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
-        <div className="flex min-w-sm min-h-sm">
+        <div className="min-w-sm min-h-sm">
           <CardLoader />
         </div>
       </div>
@@ -149,28 +135,28 @@ const Home = () => {
         <div className="mt-10 text-center">
           {isFetchingNextPage ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 min-h-screen">
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
-              <div className="flex min-w-sm min-h-sm">
+              <div className="min-w-sm min-h-sm">
                 <CardLoader />
               </div>
             </div>

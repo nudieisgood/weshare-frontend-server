@@ -4,7 +4,7 @@ const ShowMapContainer = ({ city, geoLocation }) => {
   return (
     <div className="border-t">
       <h1 className="text-2xl my-4 ">住宿地點</h1>
-      <div className="text-xl mb-4">{city} 台灣</div>
+      <div className="text-md mb-4">{city} 台灣</div>
       {!geoLocation?.lat ? (
         <div className="p-8 items-center flex gap-2">
           <BiError className="text-2xl" />

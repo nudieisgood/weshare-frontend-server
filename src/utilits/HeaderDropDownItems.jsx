@@ -1,4 +1,4 @@
-import { BiLogOutCircle, BiLogInCircle } from "react-icons/bi";
+import { BiLogInCircle } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { BsPersonGear } from "react-icons/bs";
 import { MdOutlineAddHomeWork } from "react-icons/md";

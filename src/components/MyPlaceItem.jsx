@@ -2,7 +2,7 @@ import { Form, Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const MyPlaceItem = ({ address, title, _id, photos, description }) => {
+const MyPlaceItem = ({ title, _id, photos, description }) => {
   const shortTitle = title.length > 20 ? title.slice(0, 20) + "  ..." : title;
 
   const shortDescription =

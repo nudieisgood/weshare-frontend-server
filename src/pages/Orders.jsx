@@ -9,14 +9,12 @@ export const loader = async () => {
     const res = await customFetch.get("/booking/orders");
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
 const Orders = () => {
   const { data: orders } = useLoaderData();
-
-  console.log(orders);
 
   const checkInDates = orders.map((order) => order.checkIn);
 
