@@ -1,10 +1,29 @@
 import { BiError } from "react-icons/bi";
+import { GoChecklist } from "react-icons/go";
+import { useLocation } from "react-router-dom";
 
-const ShowMapContainer = ({ city, geoLocation }) => {
+const ShowMapContainer = ({ address, city, geoLocation, isBookingConfirm }) => {
+  console.log(isBookingConfirm);
+  const location = useLocation();
+  const isBookingPage = location.pathname.startsWith("/account/bookings");
   return (
     <div className="border-t">
       <h1 className="text-2xl my-4 ">住宿地點</h1>
-      <div className="text-md mb-4">{city} 台灣</div>
+      <div className="text-md mb-4">
+        <p>
+          {isBookingPage ? (isBookingConfirm ? `${address}` : "") : `${city}`}
+        </p>
+        <p className="mt-4">
+          {isBookingPage ? (
+            ""
+          ) : (
+            <div className="flex items-center gap-1">
+              <GoChecklist className="text-xl" />
+              預定確認後可以在訂單查看完整地址
+            </div>
+          )}
+        </p>
+      </div>
       {!geoLocation?.lat ? (
         <div className="p-8 items-center flex gap-2">
           <BiError className="text-2xl" />

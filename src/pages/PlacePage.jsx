@@ -157,7 +157,7 @@ const PlacePage = () => {
               className="text-gray-500 underline hover:text-black"
               href={`http://maps.google.com/?q=${address}`}
             >
-              {address}
+              {city}
             </a>
           </div>
           <div className="flex items-center gap-6">

@@ -23,6 +23,7 @@ import Spinner from "./Spinner";
 import CardLoader from "./CardLoader";
 import FirstAndFavPagePlaceCard from "./FirstAndFavPagePlaceCard";
 import ShowMapContainer from "./ShowMapContainer";
+import ScreenLoader from "./ScreenLoader";
 
 export {
   Header,
@@ -50,4 +51,5 @@ export {
   CardLoader,
   FirstAndFavPagePlaceCard,
   ShowMapContainer,
+  ScreenLoader,
 };

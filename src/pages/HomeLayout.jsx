@@ -1,12 +1,15 @@
-import { Outlet } from "react-router-dom";
-import { Header, Footer } from "../components";
+import { Outlet, useNavigation } from "react-router-dom";
+import { Header, Footer, ScreenLoader } from "../components";
 
 const HomeLayout = () => {
+  const navigation = useNavigation();
+  const isPageLoading = navigation.state === "loading";
+
   return (
     <>
-      <div className="mx-4 sm:mx-8 lg:mx-20 md-12  py-4 flex flex-col min-h-screen">
+      <div className="mx-4 sm:mx-8 lg:mx-20 md-12 py-4 flex flex-col min-h-screen">
         <Header />
-        <Outlet />
+        {isPageLoading ? <ScreenLoader /> : <Outlet />}
         <Footer />
       </div>
     </>

@@ -219,6 +219,9 @@ const BookingPage = () => {
               address={place.address}
               city={place.city}
               geoLocation={place.geoLocation}
+              isBookingConfirm={
+                bookingStatus === "confirm" || bookingStatus === "completed"
+              }
             />
           </div>
           <div className="border-t my-4"></div>

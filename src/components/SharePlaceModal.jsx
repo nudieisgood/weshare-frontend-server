@@ -22,7 +22,7 @@ const SharePlaceModal = () => {
       item: (
         <a
           target="blank"
-          className="flex items-center gap-2 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2"
           href={`mailto:${user?.email}`}
         >
           <GoMail /> <p>電子郵件</p>
@@ -35,7 +35,7 @@ const SharePlaceModal = () => {
       item: (
         <a
           target="blank"
-          className="flex items-center gap-2 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2"
           href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
         >
           <BsFacebook />
@@ -49,7 +49,7 @@ const SharePlaceModal = () => {
       item: (
         <a
           target="blank"
-          className="flex items-center gap-2 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2"
           href={`https://www.instagram.com`}
         >
           <BsInstagram />
@@ -62,7 +62,7 @@ const SharePlaceModal = () => {
       item: (
         <a
           target="blank"
-          className="flex items-center gap-2 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2"
           href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
         >
           <FaLine />
@@ -76,7 +76,7 @@ const SharePlaceModal = () => {
       item: (
         <a
           target="blank"
-          className="flex items-center gap-2 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2"
           href={`https://twitter.com/intent/tweet?text=${url}`}
         >
           <RxTwitterLogo />
@@ -98,11 +98,11 @@ const SharePlaceModal = () => {
             className="py-6 px-8 border rounded-xl hover:bg-gray-100 cursor-pointer"
           >
             {copied ? (
-              <div className="flex items-center gap-2 justify-center">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
                 <AiOutlineCheck className="text-green-600" /> <p>已複製</p>
               </div>
             ) : (
-              <div className="flex items-center gap-2 justify-center">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
                 <FiCopy /> <p>複製此連結</p>
               </div>
             )}
